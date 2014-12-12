@@ -5,6 +5,8 @@ var box_index = 0;
 
 var btn_prev;
 
+var dots;
+
 function init() {
     carousel_container = $('#carousel-container');
     boxes = $('.box');
@@ -13,6 +15,8 @@ function init() {
     
     btn_next.click(slideNext);
     btn_prev.click(slidePrev);
+    
+    dots = $('#dots-container img');
 }
 
 function slideNext() {
@@ -27,11 +31,14 @@ function slideNext() {
         } 
     );
     
+    $(dots[box_index]).attr('src', 'img/dot-inactive.png');
+    
     box_index++;
     if(box_index === boxes.length) {
         box_index = 0;
     }
     
+    $(dots[box_index]).attr('src', 'img/dot-active.png');
     // Animate the next box
     $(boxes[box_index]).animate(
         {
@@ -65,7 +72,7 @@ function slidePrev() {
            // $(this).css('left', '600px');//happens when done
         }
     );
-    
+    $(dots[box_index]).attr('src', 'img/dot-inactive.png');
     box_index = previousBoxIndex();
     
     // Animate the next box
@@ -78,6 +85,7 @@ function slidePrev() {
             //alert('Animation done');
         }
     );
+    $(dots[box_index]).attr('src', 'img/dot-active.png');
 }
 
 $(document).ready(init);
